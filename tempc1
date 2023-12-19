@@ -1,0 +1,49 @@
+				if tool.TrueName.Value == "Irish Springs Kit" then
+					for i,v in pairs({"M1911"}) do
+						local tool = SS.Weapons[v]:Clone()
+						tool.Name = "[".. player.Job.Value.. "] ".. tool.Name
+						tool.Parent = player.Backpack
+						tool.LocalScript.Disabled = false
+					end
+					if player.Character == nil then
+						return
+					end
+					if player.Character.Humanoid.Health <= 0 then
+						return
+					end
+					tool:Destroy()
+					player.Character:FindFirstChildOfClass("Shirt"):Destroy()
+					player.Character:FindFirstChildOfClass("Pants"):Destroy()
+					local pants = game.ReplicatedStorage.Samples.Pants:Clone()
+					local shirts = game.ReplicatedStorage.Samples.Shirt:Clone()
+					pants.Parent = player.Character
+					shirts.Parent = player.Character
+					player.Character.Head.NameTag.TextLabel.Visible = true
+					player.Character.Head.NameTag.JobTag.Text = "[Irish Springs LTD]"
+					player.Character.Head.NameTag.JobTag.TextColor3 = Color3.fromRGB(0, 255, 0)
+					player.Character.Humanoid:RemoveAccessories()
+					player.Character.Humanoid.MaxHealth = 115
+					player.Character.Humanoid.Health = 115
+					player.Character.Head.Transparency = 0
+					local CurrentIrishType = 1
+					local IrishFolder = SS.Samples.ISLTD[tostring(CurrentIrishType)]
+					local HeadWeld = Instance.new("WeldConstraint")
+					local Head = IrishFolder.Head:Clone()
+					HeadWeld.Parent = Head.PrimaryPart
+					HeadWeld.Part0 = Head.PrimaryPart
+					Head:SetPrimaryPartCFrame(player.Character.Head.CFrame)
+					HeadWeld.Part1 = player.Character.Head
+					Head.Parent = player.Character.Util
+					local TorsoWeld = Instance.new("WeldConstraint")
+					local Torso = IrishFolder.UpperTorso:Clone()
+					TorsoWeld.Parent = Torso.PrimaryPart
+					TorsoWeld.Part0 = Torso.PrimaryPart
+					Torso:SetPrimaryPartCFrame(player.Character.UpperTorso.CFrame)
+					TorsoWeld.Part1 = player.Character.UpperTorso
+					Torso.Parent = player.Character.Util
+					shirts.ShirtTemplate = "rbxassetid://".. IrishFolder.Shirt.Value
+					shirts.Color3 = Color3.fromRGB(255, 255, 255)
+					pants.PantsTemplate = "rbxassetid://".. IrishFolder.Pants.Value
+					pants.Color3 = Color3.fromRGB(255, 255, 255)
+					return
+				end
